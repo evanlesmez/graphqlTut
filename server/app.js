@@ -10,7 +10,7 @@ const app = express();
 mongoose.connect('mongodb://evan:test123@ds141611.mlab.com:41611/gql-evan');
 mongoose.connection.once('open', () => {
     console.log('Connected to database');
-})
+});
 
 app.use('/graphql', graphqlHTTP({
     schema,
