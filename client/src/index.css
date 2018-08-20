@@ -8,7 +8,10 @@ body {
   color: #444;
   text-align: center;
 }
-
+#main h3{
+  text-align: center;
+  color: #444;
+}
 #main{
   padding: 0px;
   box-sizing: border-box;
@@ -35,9 +38,7 @@ body {
 form{
   background: #fff;
   padding: 20px;
-  position: fixed;
-  left: 0px;
-  bottom: 0;
+  position: relative;
   width: 400px;
 }
 
@@ -66,9 +67,7 @@ form button{
   padding: 0 10px;
   border-radius: 50%;
   cursor: pointer;
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
+  position: relative;
 }
 
 #book-details{
