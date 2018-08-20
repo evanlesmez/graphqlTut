@@ -12,7 +12,7 @@ const mLab = require('./mLabcredz');
 // allow cross-origin requests
 app.use(cors());
 
-//connec to mLab database
+//connect to mLab database
 mongoose.connect(mLab.credz,{useNewUrlParser: true});
 mongoose.connection.once('open', () => {
     console.log('Connected to database');
@@ -24,7 +24,6 @@ app.use('/graphql', graphqlHTTP({
     graphiql: true
 })); // Handles graphql requests
 
-app.listen(420, () => {
-    console.log('now listening for requests on port 420')
+app.listen(4200, () => {
+    console.log('now listening for requests on port 4200')
 });
-
