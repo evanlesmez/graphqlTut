@@ -43,7 +43,6 @@ class AddBook extends Component {
  }
 
     render() {
-      console.log(this.state);
       return (
         <form id="add-book" onSubmit= {(e) => this.submitForm(e)}>
 
@@ -62,6 +61,7 @@ class AddBook extends Component {
             <option value="biography">Biography</option>
             <option value="non-fiction">Non-fiction</option>
             <option value="children">Children</option>
+            <option value="spiritual">Spiritual</option>
             </select>
         </div>
 
