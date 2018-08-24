@@ -6,24 +6,24 @@ import {getBooksQuery} from '../queries/queries';
 import BookDetails from './BookDetails';
 
 class BookList extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       selected: null
-    }
+    };
   }
 
   // function \\
-  displayBooks(){
-      var data = this.props.data;
-    if(data.loading) {
-        return(<div> Loading books... </div>);
+  displayBooks() {
+    const { data } = this.props;
+    if (data.loading) {
+        return <div> Loading books... </div>
 
     } else{
         return data.books.map(book => {
 
           return(
-            <li key={book.id} onClick={ (e) => {this.setState({ selected: book.id })}}> {book.name} </li>
+            <li key={book.id} onClick={ () => {this.setState({ selected: book.id })}}> {book.name} </li>
           );
       })
     }

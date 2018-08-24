@@ -21,8 +21,9 @@ render(){
   // let data = this.props.data;
   // console.log(data);
   return(
-    <div>
+    <div style={{display: 'flex', justifyContent:'center', width:'80%'}}>
       <h1>Tables!</h1>
+      <div>
       <VictoryChart domainPadding={20} theme={VictoryTheme.material}>
         <VictoryAxis  tickFormat={names}/>
         <VictoryAxis dependentAxis tickFormat={(y)=> (y/10)*10}/>
@@ -31,6 +32,8 @@ render(){
           <VictoryBar data={data} x="name" y="bookCount"/>
         </VictoryStack>
       </VictoryChart>
+    </div>
+
     </div>
   );
   }
