@@ -14,10 +14,16 @@ import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryStack } fro
 class DataTable extends Component {
 // state = {authorBookCountData: []};
 
+// Compare stored dates to current date
+checkRecentlyCreated = (bookDate) => {
+  let now = new Date();
+  bookDate = new Date(bookDate);
+  console.log(bookDate);
+}
 render(){
   let {data} = this.props;
 
-  let names = [];
+  let xLabels = [];
   let authorBookCountData = [];
   // stub.map(author => {
   //   return names.push(author.name);
@@ -25,7 +31,9 @@ render(){
   switch(data.loading){
     case false:
       data.authors.map(author => {
-        names.push(author.name);
+        console.log(author.books);
+        this.checkRecentlyCreated(author.books[0].dateCreated);
+        xLabels.push(author.name);
         let authorObject = {name:author.name, id: author.id, bookCount: author.books.length};
         return authorBookCountData.push(authorObject);
       });
@@ -37,15 +45,15 @@ render(){
   return(
     <div style={{display: 'flex', justifyContent:'center', width:'80%'}}>
       <h1>Tables!</h1>
-
+      <div>
       <VictoryChart domainPadding={20} theme={VictoryTheme.material}>
-        <VictoryAxis  tickFormat={names}/>
+        <VictoryAxis  tickFormat={xLabels}/>
         <VictoryAxis dependentAxis tickFormat={(y)=> (y*10)/10} tickCount={3}/>
         <VictoryStack colorScale={"warm"}>
           {data.loading ? null:<VictoryBar data={authorBookCountData} x="name" y="bookCount"/>}
         </VictoryStack>
       </VictoryChart>
-
+      </div>
     </div>
   );
   }

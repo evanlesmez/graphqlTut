@@ -9,6 +9,7 @@ const getAuthorsWithBooksQuery = gql`
         books {
           name
           id
+          dateCreated
         }
       }
     }
