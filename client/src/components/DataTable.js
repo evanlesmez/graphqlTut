@@ -11,46 +11,60 @@ import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryStack } fro
 //   {name: "Ghibli", id: 4, bookCount: 6}
 // ];
 
-class DataTable extends Component {
-// state = {authorBookCountData: []};
+// Current fix because data.loading returning false on re-render even though
+// authors are returning undefined on update. If I have time try to fix this
+let xLabels = [];
+let bookCountData = [];
+let recentCount = 0;
 
-// Compare stored dates to current date
+class DataTable extends Component {
+
+// state = {bookCountData: []};
+
+// Compare stored dates to current date and return true or false if book within time frame
 checkRecentlyCreated = (bookDate) => {
   let now = new Date();
   bookDate = new Date(bookDate);
-  console.log(bookDate);
+
+  // Date offset in milis
+  let dayOffset = 1000 * 60 * 60 * 24;
+  return (now-dayOffset)<=bookDate;
 }
 render(){
   let {data} = this.props;
 
-  let xLabels = [];
-  let authorBookCountData = [];
-  // stub.map(author => {
-  //   return names.push(author.name);
-  // });
   switch(data.loading){
     case false:
-      data.authors.map(author => {
-        console.log(author.books);
-        this.checkRecentlyCreated(author.books[0].dateCreated);
+      data.authors && data.authors.map(author => {
+        author.books.forEach(book => {
+          this.checkRecentlyCreated(book.dateCreated) ? recentCount += 1 :
+          console.log("Old book");
+        });
+
         xLabels.push(author.name);
         let authorObject = {name:author.name, id: author.id, bookCount: author.books.length};
-        return authorBookCountData.push(authorObject);
+        return bookCountData.push(authorObject);
       });
+
+      // Add the recent count to the end of book count array
+      xLabels.push("Added within 1 day");
+      bookCountData.push({name:"Added within 1 day", bookCount: recentCount});
       break;
     default:
       console.log("Data is loading");
   };
-  console.log(authorBookCountData);
   return(
-    <div style={{display: 'flex', justifyContent:'center', width:'80%'}}>
-      <h1>Tables!</h1>
+    <div style={{display: 'block', justifyContent:'center', width:'100%'}}>
+      <div>
+        <h1>Tables!</h1>
+      </div>
       <div>
       <VictoryChart domainPadding={20} theme={VictoryTheme.material}>
         <VictoryAxis  tickFormat={xLabels}/>
-        <VictoryAxis dependentAxis tickFormat={(y)=> (y*10)/10} tickCount={3}/>
+        {data.loading? <VictoryAxis dependentAxis label="loading" tickCount={1}/> :
+          <VictoryAxis dependentAxis  tickFormat={(y)=> (y*10)/10} tickCount={4}/>}
         <VictoryStack colorScale={"warm"}>
-          {data.loading ? null:<VictoryBar data={authorBookCountData} x="name" y="bookCount"/>}
+          {data.loading ? null:<VictoryBar data={bookCountData} x="name" y="bookCount"/>}
         </VictoryStack>
       </VictoryChart>
       </div>
