@@ -85,7 +85,7 @@ render(){
           style={{ border: { stroke: "black" }, title: { fontSize: 9 }}}
           data={[
             { name: "Old", symbol: { fill: '#e75480' }, labels:{fontSize: 9}},
-            { name: "Recently Added (1 day)", symbol: { fill: "gold" }, labels:{fontSize: 9}}
+            { name: "Added Today!", symbol: { fill: "gold" }, labels:{fontSize: 9}}
           ]}
         />
         <VictoryAxis  tickFormat={xLabels} style={styles.axis}/>
