@@ -45,12 +45,12 @@ class AddBook extends Component {
 
         <div className="field">
             <label> Book name: </label>
-            <input name="bookName" type="text" onChange={(e) => this.handleInputChange(e)}/>
+            <input name="bookName" type="text" onChange={(e) => this.handleInputChange(e)} required/>
         </div>
 
         <div className="field">
           <label>Genre:</label>
-          <select name="genre" label="genre" onChange={(e) => this.handleInputChange(e)}>
+          <select name="genre" label="genre" onChange={(e) => this.handleInputChange(e)} required>
             <option value=''>Select Genre</option>
             <option value="sci-Fi">Sci-Fi</option>
             <option value="horror">Horror</option>
@@ -63,8 +63,8 @@ class AddBook extends Component {
 
           <div className="field">
             <label>Author:</label>
-            <select name='authorId' onChange={(e) => this.handleInputChange(e)}>
-              <option> Select author </option>
+            <select name='authorId' onChange={(e) => this.handleInputChange(e)} required>
+              <option value=''> Select author </option>
               {this.displayAuthors()}
             </select>
           </div>
